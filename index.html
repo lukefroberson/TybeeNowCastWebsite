@@ -1076,6 +1076,7 @@ function showTab(id, btn) {
   btn.classList.add('active');
   if (id === 'historic') setTimeout(updateHistoric, 80);
   if (id === 'dashboard' && !mapInitialized) setTimeout(initMap, 100);
+  if (id === 'dashboard') fetchLiveConditions();
 }
 
 // ─── STATUS HELPER ───
@@ -1770,12 +1771,7 @@ function extractUsgsValues(json, paramCode) {
   return null;
 }
 
-// ── Re-fetch on dashboard tab switch ─────────────────────────────────────
-const _origShowTab = showTab;
-function showTab(id, btn) {
-  _origShowTab(id, btn);
-  if (id === 'dashboard') fetchLiveConditions();
-}
+// (dashboard re-fetch handled inside showTab)
 
 // Initial fetch
 document.addEventListener('DOMContentLoaded', fetchLiveConditions);
